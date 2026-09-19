@@ -1,0 +1,59 @@
+services:
+  order-service-postgres:
+    image: postgres:16-alpine
+    container_name: order-service-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: order_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - order-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d order_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  payment-service-postgres:
+    image: postgres:16-alpine
+    container_name: payment-service-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: payment-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - payment-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d payment-db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  stock-service-postgres:
+    image: postgres:16-alpine
+    container_name: stock-service-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: stock_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - stock-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d stock_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+volumes:
+  stock-data:
+  payment-data:
+  order-data:

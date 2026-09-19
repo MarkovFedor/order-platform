@@ -1,0 +1,17 @@
+package org.example.events;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+
+public record ProductChangedEvent(
+        UUID eventId,
+        Long productId,
+        String name,
+        Long price,
+        Integer available,
+        ProductAction action,
+        LocalDateTime occurredAt
+) {}
