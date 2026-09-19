@@ -8,13 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dto.ProductCreate;
 import org.example.dto.ProductGet;
 import org.example.dto.ProductUpdateDto;
-import org.example.entity.OutboxEvent;
-import org.example.entity.ProcessedEvent;
-import org.example.entity.Product;
-import org.example.entity.Reservation;
-import org.example.events.OrderCreatedEvent;
-import org.example.events.ProductAction;
-import org.example.events.ProductChangedEvent;
+import org.example.entity.*;
+import org.example.events.*;
 import org.example.repository.OutboxRepository;
 import org.example.repository.ProcessedEventRepository;
 import org.example.repository.ReservationRepository;
@@ -43,6 +38,9 @@ public class StockService {
 
     @Autowired
     private ProcessedEventRepository processedEventRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @Transactional
     public Long createProduct(ProductCreate request) {
@@ -151,14 +149,46 @@ public class StockService {
         processedEventRepository.save(new ProcessedEvent(event.eventId(), LocalDateTime.now()));
         Product product = stockRepository.findByIdForUpdate(event.productId()).orElse(null);
         if(product == null) {
-            fail(event);
+            fail(event, "PRODUCT_NOT_FOUND"); // Почему бы не проверять это на стороне order_service
             return;
         }
-
+        if(product.getAvailable() < event.quanity()) {
+            fail(event, "NOT_ENOUGH_QUANTITY");
+            return;
+        }
+        Reservation reservation = new Reservation();
         product.setAvailable(product.getAvailable() - event.quanity());
+        reservation.setQuantity(event.quanity());
+        reservation.setOrder_id(event.orderId());
+        reservation.setStatus(ReservationStatus.RESEVED);
+        reservation.setProductId(event.productId());
+        reservation.setCreatedAt(event.createdAt());
+        reservationRepository.save(reservation);
+
+        StockReservedEvent reserved = new StockReservedEvent(
+                UUID.randomUUID(), event.orderId(), LocalDateTime.now()
+        );
+        outboxRepository.save(OutboxEvent.of(
+                "Order", event.orderId().toString(),
+                "stock.reserved", toJson(reserved)
+        ));
+        publishChange(product, ProductAction.UPDATED);
      }
 
-     public void fail(OrderCreatedEvent event) {
-        //TODO
+     public void fail(OrderCreatedEvent event, String message) {
+         StockReservationFailedEvent failedEvent = new StockReservationFailedEvent(
+                 event.eventId(),
+                 event.orderId(),
+                 message,
+                 LocalDateTime.now()
+         );
+         outboxRepository.save(OutboxEvent.of(
+                 "Order", event.orderId().toString(),
+                 "stock.failed",
+                 toJson(failedEvent)
+         ));
      }
+    private String toJson(Object o) {
+        return objectMapper.writeValueAsString(o);
+    }
 }

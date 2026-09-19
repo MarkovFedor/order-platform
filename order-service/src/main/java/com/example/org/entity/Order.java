@@ -31,6 +31,12 @@ public class Order {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name="account_id")
+    private Long accountId;
+
+    @Column(name="amount")
+    private Long amount;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;

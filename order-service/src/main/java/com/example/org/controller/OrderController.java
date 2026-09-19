@@ -6,12 +6,11 @@ import com.example.org.DTO.ProductViewResponseDto;
 import com.example.org.entity.ProductView;
 import com.example.org.service.OrderService;
 import com.example.org.service.ProductViewService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +31,15 @@ public class OrderController {
     @GetMapping("/products")
     public List<ProductViewResponseDto> getAllProducts() {
         return productViewService.getAllProducts();
+    }
+
+    @GetMapping("/order/{id}")
+    public OrderShow getOrderById(@PathVariable Long id) {
+        return orderService.getOrderById(id);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> entityNotFoundExceptionHandler(EntityNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class OrderCreate {
     private Long productId;
-    private Long quantity;
+    private Integer quantity;
+    private Long accountId;
 }

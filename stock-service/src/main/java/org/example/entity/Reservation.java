@@ -23,7 +23,7 @@ public class Reservation {
     private Long order_id;
 
     @Column(name="quantity")
-    private Long quntity;
+    private Integer quantity;
 
     @Column(name="product_id")
     private Long productId;
