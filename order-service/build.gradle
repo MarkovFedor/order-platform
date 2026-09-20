@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+	implementation project(':common-contracts')
+	implementation project(':common-kafka')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-kafka'
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'

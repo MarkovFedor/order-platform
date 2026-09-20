@@ -1,5 +1,10 @@
 package org.example.service;
 
+import com.example.events.OrderCreatedEvent;
+import com.example.events.ProductAction;
+import com.example.events.ProductChangedEvent;
+import com.example.events.StockReservationFailedEvent;
+import com.example.events.StockReservedEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -9,7 +14,6 @@ import org.example.dto.ProductCreate;
 import org.example.dto.ProductGet;
 import org.example.dto.ProductUpdateDto;
 import org.example.entity.*;
-import org.example.events.*;
 import org.example.repository.OutboxRepository;
 import org.example.repository.ProcessedEventRepository;
 import org.example.repository.ReservationRepository;

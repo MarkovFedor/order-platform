@@ -1,6 +1,6 @@
 package com.example.org.kafka;
 
-import com.example.org.events.ProductChangedEvent;
+import com.example.events.ProductChangedEvent;
 import com.example.org.service.ProductViewService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

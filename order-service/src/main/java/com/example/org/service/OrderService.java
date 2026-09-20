@@ -1,11 +1,11 @@
 package com.example.org.service;
 
-import com.example.org.DTO.OrderCreate;
-import com.example.org.DTO.OrderShow;
+import com.example.events.OrderCreatedEvent;
+import com.example.events.StockReservationFailedEvent;
+import com.example.events.StockReservedEvent;
+import com.example.org.dto.OrderCreate;
+import com.example.org.dto.OrderShow;
 import com.example.org.entity.*;
-import com.example.org.events.OrderCreatedEvent;
-import com.example.org.events.StockReservationFailedEvent;
-import com.example.org.events.StockReservedEvent;
 import com.example.org.repository.OrderRepository;
 import com.example.org.repository.OutBoxRepository;
 import com.example.org.repository.ProcessedEventRepository;

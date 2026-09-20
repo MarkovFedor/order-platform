@@ -5,6 +5,8 @@ import org.example.dto.ProductGet;
 import org.example.dto.ProductUpdateDto;
 import org.example.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,11 @@ import java.util.List;
 public class StockController {
     @Autowired
     private StockService stockService;
+
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Healthy");
+    }
 
     @PostMapping("/create")
     public Long createProduct(@RequestBody ProductCreate request) {

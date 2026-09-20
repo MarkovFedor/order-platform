@@ -1,0 +1,13 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api project(':common-contracts')
+    api platform('org.springframework.boot:spring-boot-dependencies:3.3.5')
+    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    compileOnly 'com.fasterxml.jackson.core:jackson-annotations:2.17.2'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}

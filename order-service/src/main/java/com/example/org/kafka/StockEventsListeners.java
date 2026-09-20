@@ -1,7 +1,7 @@
 package com.example.org.kafka;
 
-import com.example.org.events.StockReservationFailedEvent;
-import com.example.org.events.StockReservedEvent;
+import com.example.events.StockReservationFailedEvent;
+import com.example.events.StockReservedEvent;
 import com.example.org.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,24 +1,20 @@
 package com.example.org.service;
 
-import com.example.org.DTO.ProductViewResponseDto;
+import com.example.events.ProductAction;
+import com.example.events.ProductChangedEvent;
+import com.example.org.dto.ProductViewResponseDto;
 import com.example.org.entity.ProcessedEvent;
 import com.example.org.entity.ProductView;
-import com.example.org.events.ProductAction;
-import com.example.org.events.ProductChangedEvent;
-import com.example.org.kafka.ProductViewListener;
 import com.example.org.repository.ProcessedEventRepository;
 import com.example.org.repository.ProductViewRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service

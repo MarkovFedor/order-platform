@@ -1,9 +1,8 @@
 package com.example.org.controller;
 
-import com.example.org.DTO.OrderCreate;
-import com.example.org.DTO.OrderShow;
-import com.example.org.DTO.ProductViewResponseDto;
-import com.example.org.entity.ProductView;
+import com.example.org.dto.OrderCreate;
+import com.example.org.dto.OrderShow;
+import com.example.org.dto.ProductViewResponseDto;
 import com.example.org.service.OrderService;
 import com.example.org.service.ProductViewService;
 import jakarta.persistence.EntityNotFoundException;

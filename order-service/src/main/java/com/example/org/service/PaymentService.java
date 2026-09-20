@@ -1,12 +1,12 @@
 package com.example.org.service;
 
+import com.example.events.PaymentCancelledEvent;
+import com.example.events.PaymentCompletedEvent;
+import com.example.events.PaymentRequestedEvent;
 import com.example.org.entity.Order;
 import com.example.org.entity.OrderStatus;
 import com.example.org.entity.OutboxEvent;
 import com.example.org.entity.ProcessedEvent;
-import com.example.org.events.PaymentCancelledEvent;
-import com.example.org.events.PaymentCompletedEvent;
-import com.example.org.events.PaymentRequestedEvent;
 import com.example.org.repository.OrderRepository;
 import com.example.org.repository.OutBoxRepository;
 import com.example.org.repository.ProcessedEventRepository;

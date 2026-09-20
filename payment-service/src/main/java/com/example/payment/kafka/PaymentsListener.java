@@ -1,6 +1,6 @@
 package com.example.payment.kafka;
 
-import com.example.payment.events.PaymentRequestedEvent;
+import com.example.events.PaymentRequestedEvent;
 import com.example.payment.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

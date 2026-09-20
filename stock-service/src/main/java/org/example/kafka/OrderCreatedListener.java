@@ -1,6 +1,6 @@
 package org.example.kafka;
 
-import org.example.events.OrderCreatedEvent;
+import com.example.events.OrderCreatedEvent;
 import org.example.service.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
