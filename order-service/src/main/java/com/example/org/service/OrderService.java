@@ -37,6 +37,9 @@ public class OrderService {
     private ObjectMapper objectMapper;
 
     @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
     private ProductViewRepository productViewRepository;
 
     @Transactional
@@ -53,7 +56,7 @@ public class OrderService {
             throw new EntityNotFoundException("Not found product");
         }
 
-        Long price = product.get().getPrice();
+        Integer price = product.get().getPrice();
         order.setAmount(orderCreate.getQuantity()*price);
         order.addHistory();
         repository.save(order);
@@ -101,6 +104,7 @@ public class OrderService {
 
         order.get().setStatus(OrderStatus.STOCK_RESERVED);
         log.info("Order with id={} marked as reserved", order.get().getId());
+        paymentService.requestPayment(order.get());
     }
 
     @Transactional

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class ProductViewResponseDto {
     private Long id;
     private String name;
-    private Long price;
+    private Integer price;
     private Integer available;
     private LocalDateTime updatedAt;
 

@@ -10,7 +10,7 @@ public record ProductChangedEvent(
         UUID eventId,
         Long productId,
         String name,
-        Long price,
+        Integer price,
         Integer available,
         ProductAction action,
         LocalDateTime occurredAt

@@ -6,6 +6,6 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public record ProductUpdateDto(
     String name,
     Integer available,
-    Long price
+    Integer price
 ){}
 

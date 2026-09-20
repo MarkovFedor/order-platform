@@ -7,6 +7,6 @@ public record PaymentRequestedEvent (
     UUID eventId,
     Long orderId,
     Long accountId,
-    Integer quanity,
+    Integer amount,
     LocalDateTime createdAt
 ) {}

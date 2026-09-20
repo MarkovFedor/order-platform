@@ -21,7 +21,7 @@ public class Product {
     private String name;
 
     @Column(name = "price", nullable = false)
-    private Long price;
+    private Integer price;
 
     @Column(name = "available", nullable = false)
     private Integer available;

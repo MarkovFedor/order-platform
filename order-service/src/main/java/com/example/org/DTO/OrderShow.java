@@ -12,7 +12,7 @@ public class OrderShow {
     private LocalDateTime updationDateTime;
     private OrderStatus status;
     private Integer quantity;
-    private Long amount;
+    private Integer amount;
     private Long accountId;
 
     public static OrderShow from(Order order) {

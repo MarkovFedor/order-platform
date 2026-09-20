@@ -7,7 +7,7 @@ import org.example.entity.Product;
 public class ProductGet {
     private Long id;
     private String name;
-    private Long price;
+    private Integer price;
     private Integer available;
 
     public static ProductGet from(Product product) {

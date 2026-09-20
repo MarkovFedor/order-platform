@@ -35,7 +35,7 @@ public class Order {
     private Long accountId;
 
     @Column(name="amount")
-    private Long amount;
+    private Integer amount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
